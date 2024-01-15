@@ -1,0 +1,2 @@
+# To create the exe file
+pyinstaller --onefile --name="Making my Money-Remastered(v1.0)" --noconsole --windowed --icon=assets\Images\Others\game-icon.ico main.py
