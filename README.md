@@ -1,7 +1,7 @@
 # Making_my_Money_Remastered
 This repository holds the Remastered version of the game "Making my Money". Which is the first game I ever created.
 
-![Cover](https://github.com/RaffaeleFiorillo/Making_my_Money/assets/75253335/10dc7679-0291-46ca-adba-1868dfb08d69)
+![Game screenshot - Remastered](https://github.com/RaffaeleFiorillo/Making_my_Money_Remastered/assets/75253335/998b522d-d3b8-4540-a4fc-0f1525ba25a1)
 
 # Description of the Game
 In this section I will talk about how the game works, the agents and entities involved,... and all that stuff 
