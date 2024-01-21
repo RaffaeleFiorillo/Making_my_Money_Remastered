@@ -24,7 +24,7 @@ class Base:
 		
 	def update(self, dt):
 		self.x += self.speed[0] * dt
-		self.y += self.speed[1] * dt
+		self.y += self.speed[1]  * dt
 		
 		# Guarantee that an agent does not go outside the screen
 		self.x = min(WIDTH - self.size[0], max(0, self.x))

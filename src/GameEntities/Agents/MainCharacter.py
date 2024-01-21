@@ -1,5 +1,7 @@
 import pygame
-from src.GameEntities.Agents.BaseAgent import Base
+import threading
+import time
+from .BaseAgent import Base
 from src.GameEntities.Collectables import Collectable
 
 
@@ -25,11 +27,18 @@ class Me(Base):
     # ---------------------------- Collisions Effects ------------------------------------
     def _apply_money_collision_effect(self, money: Collectable):
         money.apply_collected_effect()
-        self.money += money.value
+        self.money += money.VALUE
 
     def _apply_cure_collision_effect(self, cure: Collectable):
         cure.apply_collected_effect()
-        self.lives += cure.value
+        self.lives += cure.VALUE
+    
+    def _change_image_cycle(self):
+        time.sleep((self.COOL_DOWN_TIME*0.15))
+        self.image = self.IMAGE
+        self.IMAGE.set_alpha(100)  # makes the player become translucent
+        time.sleep((self.COOL_DOWN_TIME*0.85))
+        self.IMAGE.set_alpha(255)  # makes the player become normal
     
     def _apply_enemy_collision_effect(self):
         self.DEATH_SOUND.play()
@@ -38,6 +47,8 @@ class Me(Base):
         self.x = 465
         self.y = 300
         self.cool_down_timer = self.COOL_DOWN_TIME
+        hit_animation_thread = threading.Thread(target=self._change_image_cycle)
+        hit_animation_thread.start()
         
     # -------------------------- Collisions Detection -----------------------------------
     def _is_colliding_with_hitbox(self, hitbox):
@@ -50,7 +61,7 @@ class Me(Base):
 
     def is_colliding_with_collectable(self, collectable: Collectable):
         if self._is_colliding_with_hitbox(collectable.hitbox):
-            if collectable.type == "Money":
+            if collectable.TYPE == "Money":
                 self._apply_money_collision_effect(collectable)
             else:
                 self._apply_cure_collision_effect(collectable)
@@ -66,5 +77,5 @@ class Me(Base):
         
     def draw(self, screen):
         super().draw(screen)
-        screen.blit(self.FONT.render(str(self.money), True, (0, 255, 255)), (140, 5))
-        [pygame.draw.rect(screen, (0, 255, 0), (542+25*i, 25, 20, 6)) for i in range(self.lives)]
+        screen.blit(self.FONT.render(str(self.money), True, (0, 255, 255)), (140, 5))  # displays the collected money
+        [pygame.draw.rect(screen, (0, 255, 0), (542+25*i, 25, 20, 6)) for i in range(self.lives)]  # displays lives left

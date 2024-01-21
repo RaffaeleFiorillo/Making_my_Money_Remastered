@@ -1,0 +1,2 @@
+from src.GameEntities.Collectables.Collectable import Collectable
+from src.GameEntities.Collectables.CollectableManager import CollectableManager

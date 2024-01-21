@@ -2,7 +2,7 @@ import pygame
 import sys
 from src.Utils.GAME_conf import SCREEN, BACKGROUND_IMAGE
 from src.GameEntities import Agents
-from src.GameEntities.Collectables.CollectableManager import CollectableManager
+from src.GameEntities.Collectables import CollectableManager
 
 
 class Base_Game:
